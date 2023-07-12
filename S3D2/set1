@@ -1,0 +1,88 @@
+
+
+1.Create a Customers table / collection with the following fields: id (unique identifier), name, email, address, and phone_number.
+
+{
+    "id": ObjectId,
+    "name": String,
+    "email": String,
+    "address": String,
+	"phone_number": String
+}
+
+2. Insert five rows / documents into the Customers table / collection with data of your choice.
+
+db.Customers.insertMany([
+{name: 'abc', email: 'abc@gmail.com', address: 'abc', phone_number: '1234567890'},
+{name: 'def', email: 'def@gmail.com', address: 'def', phone_number: '1234567890'},
+{name: 'ghi', email: 'ghi@gmail.com', address: 'ghi', phone_number: '1234567890'},
+{name: 'jkl', email: 'jkl@gmail.com', address: 'jkl', phone_number: '1234567890'},
+{name: 'xyz', email: 'xyz@gmail.com', address: 'xyz', phone_number: '1234567890'},
+])
+
+3. Write a query to fetch all data from the Customers table / collection.
+
+db.Customers.find()
+
+4. Write a query to select only the name and email fields for all customers.
+
+db.Customers.find({}, {name: 1, email: 1})
+
+5. Write a query to fetch the customer with the id of 3.
+
+db.Customers.find({id: 3})
+
+6. Write a query to fetch all customers whose name starts with 'A'.
+
+db.Customers.find({name: {$regex: '^A'}})
+
+7. Write a query to fetch all customers, ordered by name in descending order.
+
+db.Customers.find().sort({name: -1})
+
+8. Write a query to update the address of the customer with id 4.
+
+db.Customers.updateOne(
+  { _id: 4 },
+  { $set: { address: "Delhi" } }
+)
+
+9. Write a query to fetch the top 3 customers when ordered by id in ascending order.
+
+db.Customers.find().sort({id: 1}).limit(3)
+
+10. Write a query to delete the customer with id 2.
+
+db.Customers.deleteOne({id: 2})
+
+11. Write a query to count the number of customers
+
+db.Customers.countDocuments()
+
+12. Write a query to fetch all customers except the first two when ordered by id in ascending order.
+
+db.Customers.find().sort({id: 1}).skip(2)
+
+13. Write a query to fetch all customers whose id is greater than 2 and name starts with 'B'.
+
+db.Customers.find({id: {$gt:2}}, {name: {$regex: '^B'}})
+
+14.Write a query to fetch all customers whose id is less than 3 or name ends with 's'.
+
+db.Customers.find({
+  $or: [
+    { _id: { $lt: 3 } },
+    { name: { $regex: /s$/ } }
+  ]
+})
+
+15. Write a query to fetch all customers where the phone_number field is not set or is null.
+
+db.Customers.find({
+  $or: [
+    { phone_number: { $exists: false } },
+    { phone_number: { $eq: null } }
+  ]
+})
+
+

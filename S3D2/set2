@@ -1,0 +1,60 @@
+
+
+16. Create a Restaurants table / collection with the fields defined above.
+
+{
+    "_id": ObjectId,
+    "name": String,
+    "cuisine_type": String,
+    "location": String,
+	"average_rating": String,
+	"delivery_available": Boolean
+}
+
+
+17. Insert five rows / documents into the Restaurants table / collection with data of your 
+
+db.Restaurants.insertMany([
+{name: 'abc', cuisine_type: 'chinese', location: 'abc', average_rating: '4.2', delivery_available: true},
+{name: 'def', cuisine_type: 'italian', location: 'def', average_rating: '3.4', delivery_available: false},
+{name: 'ghi', cuisine_type: 'indian', location: 'ghi', average_rating: '2.5', delivery_available: false},
+{name: 'jkl', cuisine_type: 'japanese', location: 'jkl', average_rating: '4.5', delivery_available: true},
+{name: 'xyz', cuisine_type: 'turkish', location: 'xyz', average_rating: '3.8': delivery_available: true},
+])
+
+18. Write a query to fetch all restaurants, ordered by average_rating in descending order.
+
+db.Restaurants.find().sort({average_rating: -1})
+
+19. Write a query to fetch all restaurants that offer delivery_available and have an average_rating of more than 4.
+
+db.Restaurants.find({delivery_available: true, average_rating: {$gt:2}})
+
+20. Write a query to fetch all restaurants where the cuisine_type field is not set or is null.
+
+db.Restaurants.find({
+  $or: [
+    { cuisine_type: { $exists: false } },
+    { cuisine_type: { $eq: null } }
+  ]
+})
+
+21. Write a query to count the number of restaurants that have delivery_available.
+
+db.Restaurants.countDocuments({delivery_available: true})
+
+22. Write a query to fetch all restaurants whose location contains 'New York'.
+
+db.Restaurants.find({location: 'New York'})
+
+23. Write a query to calculate the average average_rating of all restaurants.
+
+db.Restaurants.find({ $avg: "$average_rating" })
+
+24. Write a query to fetch the top 5 restaurants when ordered by average_rating in descending order.
+
+db.Restaurants.find().sort({average_rating: -1}).limit(5)
+
+25. Write a query to delete the restaurant with id 3.
+
+db.Restaurants.deleteOne({id: 3})
